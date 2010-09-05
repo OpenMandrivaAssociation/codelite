@@ -1,5 +1,5 @@
 %define name	codelite
-%define version	2.6.0.4189
+%define version	2.7.0.4375
 %define	release	%mkrel 1
 
 Name:		%{name}
