@@ -1,5 +1,5 @@
 %define name	codelite
-%define version	2.7.0.4375
+%define version	2.8.0.4537
 %define	release	%mkrel 1
 
 Name:		%{name}
@@ -10,12 +10,10 @@ License:        GPLv2+
 Group:          Development/Other
 URL:            http://codelite.sourceforge.net
 Source:         http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-
 Requires: 	wxgtk2.8 xterm
 BuildRequires:	wxgtku2.8-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
  	
-
 %description
 CodeLite uses a sophisticated, yet intuitive interface which allows 
 users to easily create, build and debug complex projects.
@@ -33,14 +31,15 @@ users to easily create, build and debug complex projects.
 %{__make} 
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
-desktop-file-install  --delete-original       \
-    --copy-generic-name-to-name                              \
-          --dir $RPM_BUILD_ROOT%{_datadir}/applications            \
-                $RPM_BUILD_ROOT%{_datadir}/applications/codelite.desktop
+%{__rm} -rf %{buildroot}
+%{__make} DESTDIR=%{buildroot} install
+  desktop-file-install --delete-original      \
+  --copy-generic-name-to-name                 \
+  --dir %{buildroot}/%{_datadir}/applications \
+  %{buildroot}/%{_datadir}/applications/codelite.desktop
+
 %clean
-%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
