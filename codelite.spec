@@ -1,5 +1,5 @@
 %define name	codelite
-%define version	2.8.0.4537
+%define version	3.0.0.5041
 %define	release	%mkrel 1
 
 Name:		%{name}
@@ -12,8 +12,9 @@ URL:            http://codelite.sourceforge.net
 Source:         http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Requires: 	wxgtk2.8 xterm
 BuildRequires:	wxgtku2.8-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
- 	
+BuildRequires:	desktop-file-utils
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
+
 %description
 CodeLite uses a sophisticated, yet intuitive interface which allows 
 users to easily create, build and debug complex projects.
@@ -22,19 +23,19 @@ users to easily create, build and debug complex projects.
 %setup -q
 
 %build
-./configure 	--prefix=%{_prefix} \
-		--libdir=%{_libdir} \
-		--plugins-dir=%{_libdir}/%{name} \
+%configure2_5x	--plugins-dir=%{_libdir}/%{name} \
 		--disable-debian \
 		--disable-desktop_icon \
 		--disable-make_symlink
-%{__make} 
+%{__make}
 
 %install
 %{__rm} -rf %{buildroot}
-%{__make} DESTDIR=%{buildroot} install
-  desktop-file-install --delete-original      \
+%makeinstall_std
+
+desktop-file-install --delete-original        \
   --copy-generic-name-to-name                 \
+  --add-category="IDE"                        \
   --dir %{buildroot}/%{_datadir}/applications \
   %{buildroot}/%{_datadir}/applications/codelite.desktop
 
@@ -51,6 +52,8 @@ users to easily create, build and debug complex projects.
 %{_bindir}/codelite_exec
 %{_bindir}/codelite_kill_children
 %{_bindir}/codelite_xterm
-%{_datadir}/codelite
+%dir %{_datadir}/codelite
+%{_datadir}/codelite/*
 %{_datadir}/applications/codelite.desktop
-%{_libdir}/%{name}
+%dir %{_libdir}/%{name}
+%{_libdir}/%{name}/*
