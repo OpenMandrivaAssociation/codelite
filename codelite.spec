@@ -54,3 +54,27 @@ desktop-file-install --delete-original        \
 %{_datadir}/applications/codelite.desktop
 %{_libdir}/%{name}
 
+
+
+%changelog
+* Tue Mar 13 2012 Andrey Bondrov <abondrov@mandriva.org> 3.5.5375-1mdv2011.0
++ Revision: 784503
+- New version 3.5.5375
+
+* Wed Oct 05 2011 Andrey Bondrov <abondrov@mandriva.org> 3.0.0.5041-1
++ Revision: 703068
+- New version: 3.0.0.5041
+
+* Sun Dec 05 2010 Yuri Myasoedov <omerta13@mandriva.org> 2.8.0.4537-1mdv2011.0
++ Revision: 610614
+- New version 2.8.0.4537
+
+* Sun Sep 05 2010 Yuri Myasoedov <omerta13@mandriva.org> 2.7.0.4375-1mdv2011.0
++ Revision: 576060
+- New version 2.7.0.4368
+
+* Wed Aug 11 2010 Yuri Myasoedov <omerta13@mandriva.org> 2.6.0.4189-1mdv2011.0
++ Revision: 569106
+- initial
+
+
