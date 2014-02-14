@@ -1,13 +1,15 @@
 Summary:	A powerful open-source, cross platform code editor for C/C++
 Name:		codelite
 Version:	5.4
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://codelite.sourceforge.net
 Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}-gtk.src.tar.gz
+Source10:	%{name}.rpmlintrc
 Patch0:		codelite-5.4-desktop.patch
 Patch1:		codelite-5.4-linkage.patch
+Patch2:		codelite-5.4-libdir.patch
 BuildRequires:	cmake
 BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(freetype2)
@@ -46,10 +48,12 @@ users to easily create, build and debug complex projects.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %cmake \
-	-DPREFIX:PATH=%{_prefix}
+	-DPREFIX:PATH=%{_prefix} \
+	-DCL_INSTALL_LIBDIR=%{_lib}
 %make
 
 %install

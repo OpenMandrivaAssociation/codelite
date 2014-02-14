@@ -1,0 +1,14 @@
+diff -urN codelite-orig/CMakeLists.txt codelite-patched/CMakeLists.txt
+--- codelite-orig/CMakeLists.txt	2014-02-14 16:08:02.371570174 +1100
++++ codelite-patched/CMakeLists.txt	2014-02-14 18:31:35.085719522 +1100
+@@ -105,7 +105,9 @@
+ ## Override defaults with user input
+ ########################################
+ 
+-set( CL_INSTALL_LIBDIR "lib" )
++if ( NOT CL_INSTALL_LIBDIR )
++  set( CL_INSTALL_LIBDIR "lib" )
++endif()
+ if ( PREFIX )
+   set ( CL_PREFIX ${PREFIX} )
+ else()
