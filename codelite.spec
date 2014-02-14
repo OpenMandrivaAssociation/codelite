@@ -13,6 +13,7 @@ BuildRequires:	wxgtku3.0-devel
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(libssh)
+BuildRequires:	pkgconfig(pangoxft)
 Requires:	wxgtk3.0
 Requires:	xterm
 
