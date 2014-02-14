@@ -1,0 +1,50 @@
+diff -urN codelite-orig/DatabaseExplorer/CMakeLists.txt codelite-patched/DatabaseExplorer/CMakeLists.txt
+--- codelite-orig/DatabaseExplorer/CMakeLists.txt	2014-02-14 16:08:02.466571699 +1100
++++ codelite-patched/DatabaseExplorer/CMakeLists.txt	2014-02-14 16:36:59.448061768 +1100
+@@ -75,7 +75,7 @@
+ 
+ # Remove the "lib" prefix from the plugin name
+ set_target_properties(${PLUGIN_NAME} PROPERTIES PREFIX "")
+-target_link_libraries(${PLUGIN_NAME} ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES} ${LIBMYSQLCLIENT} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite -lplugin -ldatabaselayersqlite -lwxshapeframework)
++target_link_libraries(${PLUGIN_NAME} ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES} ${LIBMYSQLCLIENT} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite -lplugin -ldatabaselayersqlite -lwxshapeframework -lgtk-x11-2.0)
+ # Make sure that the plugin will not start build before 'plugin.so' is ready
+ add_dependencies(${PLUGIN_NAME} plugin)
+ install(TARGETS ${PLUGIN_NAME} DESTINATION ${PLUGINS_DIR})
+diff -urN codelite-orig/Plugin/CMakeLists.txt codelite-patched/Plugin/CMakeLists.txt
+--- codelite-orig/Plugin/CMakeLists.txt	2014-02-14 16:08:02.217567702 +1100
++++ codelite-patched/Plugin/CMakeLists.txt	2014-02-14 16:26:31.315884200 +1100
+@@ -67,11 +67,11 @@
+ # Define the output
+ add_library(plugin SHARED ${SRCS})
+ if(GTK2_FOUND)
+-    target_link_libraries(plugin ${LINKER_OPTIONS} ${GTK2_LIBRARIES} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite)
++    target_link_libraries(plugin ${LINKER_OPTIONS} ${GTK2_LIBRARIES} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite -ldl -lutil)
+ elseif (GTK3_FOUND)
+-    target_link_libraries(plugin ${LINKER_OPTIONS} ${GTK3_LIBRARIES} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite)
++    target_link_libraries(plugin ${LINKER_OPTIONS} ${GTK3_LIBRARIES} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite -ldl -lutil)
+ else()
+-    target_link_libraries(plugin ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite)
++    target_link_libraries(plugin ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lwxsqlite3 -lsqlite3lib -llibcodelite -ldl -lutil)
+ endif()
+ 
+ install(TARGETS plugin DESTINATION ${PLUGINS_DIR})
+diff -urN codelite-orig/sdk/databaselayer/CMakeLists.txt codelite-patched/sdk/databaselayer/CMakeLists.txt
+--- codelite-orig/sdk/databaselayer/CMakeLists.txt	2014-02-14 16:08:02.363570046 +1100
++++ codelite-patched/sdk/databaselayer/CMakeLists.txt	2014-02-14 16:08:45.190258495 +1100
+@@ -49,5 +49,5 @@
+ 
+ # Define the output
+ add_library(databaselayersqlite SHARED ${SRCS} ${MYSQL_SRCS})
+-target_link_libraries(databaselayersqlite ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES})
++target_link_libraries(databaselayersqlite ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES} -ldl)
+ install(TARGETS databaselayersqlite DESTINATION ${PLUGINS_DIR})
+diff -urN codelite-orig/sdk/wxsqlite3/CMakeLists.txt codelite-patched/sdk/wxsqlite3/CMakeLists.txt
+--- codelite-orig/sdk/wxsqlite3/CMakeLists.txt	2014-02-14 16:08:02.233567959 +1100
++++ codelite-patched/sdk/wxsqlite3/CMakeLists.txt	2014-02-14 16:08:16.004789104 +1100
+@@ -32,5 +32,5 @@
+ 
+ # Define the output
+ add_library(wxsqlite3 SHARED ${SRCS})
+-target_link_libraries(wxsqlite3 ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lsqlite3lib)
++target_link_libraries(wxsqlite3 ${LINKER_OPTIONS} ${wxWidgets_LIBRARIES} -L"${CL_LIBPATH}" -lsqlite3lib -ldl)
+ install(TARGETS wxsqlite3 DESTINATION ${PLUGINS_DIR})
