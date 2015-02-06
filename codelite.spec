@@ -1,7 +1,7 @@
 Summary:	A powerful open-source, cross platform code editor for C/C++
 Name:		codelite
 Version:	5.4
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Development/Other
 Url:		http://codelite.sourceforge.net
