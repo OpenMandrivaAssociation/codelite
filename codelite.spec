@@ -17,6 +17,10 @@ BuildRequires:	wxgtku3.2-devel
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(libssh)
 BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	pkgconfig(pango)
+BuildRequires:	pkgconfig(atk)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 Requires:	xterm
 
 %description
