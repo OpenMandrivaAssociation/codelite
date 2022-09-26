@@ -12,7 +12,7 @@ Source10:	%{name}.rpmlintrc
 Patch0:		codelite-5.4-desktop.patch
 Patch1:		codelite-16.0-compile.patch
 Patch2:		codelite-5.4-libdir.patch
-BuildRequires:	cmake
+BuildRequires:	cmake ninja
 BuildRequires:	wxgtku3.2-devel
 BuildRequires:	pkgconfig(freetype2)
 #BuildRequires:	pkgconfig(gtk+-3.0)
