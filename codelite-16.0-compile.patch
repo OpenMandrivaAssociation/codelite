@@ -1,0 +1,92 @@
+diff -up codelite-16.0.0/CodeLite/istorage.h.omv~ codelite-16.0.0/CodeLite/istorage.h
+--- codelite-16.0.0/CodeLite/istorage.h.omv~	2022-09-26 02:29:57.406700035 +0200
++++ codelite-16.0.0/CodeLite/istorage.h	2022-09-26 02:30:04.751734603 +0200
+@@ -31,6 +31,7 @@
+ #include "fileentry.h"
+ #include "pptable.h"
+ #include "tag_tree.h"
++#include <wx/filename.h>
+ 
+ #define MAX_SEARCH_LIMIT 250
+ 
+diff -up codelite-16.0.0/codelitephp/php-plugin/PHPDebugPane.cpp.omv~ codelite-16.0.0/codelitephp/php-plugin/PHPDebugPane.cpp
+--- codelite-16.0.0/codelitephp/php-plugin/PHPDebugPane.cpp.omv~	2022-09-26 03:24:56.346131401 +0200
++++ codelite-16.0.0/codelitephp/php-plugin/PHPDebugPane.cpp	2022-09-26 03:26:18.091640127 +0200
+@@ -30,10 +30,10 @@ PHPDebugPane::PHPDebugPane(wxWindow* par
+     if(phpLexer) {
+         phpLexer->Apply(m_console->GetTerminalOutputWindow());
+     }
+-    m_tbBreakpoints->AddTool(wxID_DELETE, _("Delete"), clGetManager()->GetStdIcons()->LoadBitmap("minus"),
++    m_tbBreakpoints->AddTool(wxID_DELETE, wxString(_("Delete")), wxBitmapBundle(clGetManager()->GetStdIcons()->LoadBitmap("minus")),
+                              _("Delete the selected breakpoints"));
+-    m_tbBreakpoints->AddTool(wxID_CLEAR, _("Delete all breakpoints"),
+-                             clGetManager()->GetStdIcons()->LoadBitmap("clean"), _("Delete all breakpoints"));
++    m_tbBreakpoints->AddTool(wxID_CLEAR, wxString(_("Delete all breakpoints")),
++                             wxBitmapBundle(clGetManager()->GetStdIcons()->LoadBitmap("clean")), _("Delete all breakpoints"));
+     m_tbBreakpoints->Bind(wxEVT_TOOL, &PHPDebugPane::OnDeleteBreakpoint, this, wxID_DELETE);
+     m_tbBreakpoints->Bind(wxEVT_UPDATE_UI, &PHPDebugPane::OnDeleteBreakpointUI, this, wxID_DELETE);
+     m_tbBreakpoints->Bind(wxEVT_TOOL, &PHPDebugPane::OnClearAll, this, wxID_CLEAR);
+diff -up codelite-16.0.0/CodeLite/tags_storage_sqlite3.cpp.omv~ codelite-16.0.0/CodeLite/tags_storage_sqlite3.cpp
+--- codelite-16.0.0/CodeLite/tags_storage_sqlite3.cpp.omv~	2022-09-26 02:29:22.139534568 +0200
++++ codelite-16.0.0/CodeLite/tags_storage_sqlite3.cpp	2022-09-26 02:29:28.963566518 +0200
+@@ -33,6 +33,7 @@
+ #include <unordered_set>
+ #include <wx/longlong.h>
+ #include <wx/tokenzr.h>
++#include <wx/filename.h>
+ 
+ //-------------------------------------------------
+ // Tags database class implementation
+diff -up codelite-16.0.0/LanguageServer/LanguageServerLogView.cpp.omv~ codelite-16.0.0/LanguageServer/LanguageServerLogView.cpp
+--- codelite-16.0.0/LanguageServer/LanguageServerLogView.cpp.omv~	2022-09-26 03:17:59.284399443 +0200
++++ codelite-16.0.0/LanguageServer/LanguageServerLogView.cpp	2022-09-26 03:18:04.682436802 +0200
+@@ -1,4 +1,5 @@
+ #include "LanguageServerLogView.h"
++#include <wx/menu.h>
+ 
+ LanguageServerLogView::LanguageServerLogView(wxWindow* parent)
+     : LanguageServerLogViewBase(parent)
+diff -up codelite-16.0.0/LiteEditor/syntaxhighlightdlg.cpp.omv~ codelite-16.0.0/LiteEditor/syntaxhighlightdlg.cpp
+--- codelite-16.0.0/LiteEditor/syntaxhighlightdlg.cpp.omv~	2022-09-26 03:46:09.917684392 +0200
++++ codelite-16.0.0/LiteEditor/syntaxhighlightdlg.cpp	2022-09-26 03:47:50.489306554 +0200
+@@ -149,12 +149,12 @@ SyntaxHighlightDlg::SyntaxHighlightDlg(w
+     WindowAttrManager::Load(this);
+     auto images = clGetManager()->GetStdIcons();
+ 
+-    m_toolbar->AddTool(wxID_NEW, _("New.."), images->LoadBitmap("file_new", 24));
+-    m_toolbar->AddTool(wxID_SAVE, _("Export.."), images->LoadBitmap("file_save", 24));
+-    m_toolbar->AddTool(XRCID("export_all"), _("Export All"), images->LoadBitmap("file_save_all", 24));
+-    m_toolbar->AddTool(XRCID("import_zip"), _("Import from ZIP file"), images->LoadBitmap("file_open", 24));
+-    m_toolbar->AddTool(XRCID("revert_changes"), _("Restore"), images->LoadBitmap("file_reload", 24));
+-    m_toolbar->AddTool(XRCID("import_eclipse_theme"), _("Import"), images->LoadBitmap("file_open", 24));
++    m_toolbar->AddTool(wxID_NEW, _("New.."), wxBitmapBundle(images->LoadBitmap("file_new", 24)));
++    m_toolbar->AddTool(wxID_SAVE, _("Export.."), wxBitmapBundle(images->LoadBitmap("file_save", 24)));
++    m_toolbar->AddTool(XRCID("export_all"), _("Export All"), wxBitmapBundle(images->LoadBitmap("file_save_all", 24)));
++    m_toolbar->AddTool(XRCID("import_zip"), _("Import from ZIP file"), wxBitmapBundle(images->LoadBitmap("file_open", 24)));
++    m_toolbar->AddTool(XRCID("revert_changes"), _("Restore"), wxBitmapBundle(images->LoadBitmap("file_reload", 24)));
++    m_toolbar->AddTool(XRCID("import_eclipse_theme"), _("Import"), wxBitmapBundle(images->LoadBitmap("file_open", 24)));
+     m_toolbar->Realize();
+     m_toolbar->Bind(wxEVT_TOOL, &SyntaxHighlightDlg::OnNewTheme, this, wxID_NEW);
+     m_toolbar->Bind(wxEVT_TOOL, &SyntaxHighlightDlg::OnExportSelective, this, wxID_SAVE);
+diff -up codelite-16.0.0/Plugin/clPluginsFindBar.h.omv~ codelite-16.0.0/Plugin/clPluginsFindBar.h
+--- codelite-16.0.0/Plugin/clPluginsFindBar.h.omv~	2022-09-26 02:36:03.704458634 +0200
++++ codelite-16.0.0/Plugin/clPluginsFindBar.h	2022-09-26 02:36:12.172499948 +0200
+@@ -32,6 +32,7 @@
+ #include <codelite_exports.h>
+ #include <wx/combobox.h>
+ #include <wx/panel.h>
++#include <wx/stattext.h>
+ 
+ class clToolBar;
+ class wxStyledTextCtrl;
+diff -up codelite-16.0.0/wxcrafter/myxh_propgrid.cpp.omv~ codelite-16.0.0/wxcrafter/myxh_propgrid.cpp
+--- codelite-16.0.0/wxcrafter/myxh_propgrid.cpp.omv~	2022-09-26 03:28:20.571391633 +0200
++++ codelite-16.0.0/wxcrafter/myxh_propgrid.cpp	2022-09-26 03:28:54.775599544 +0200
+@@ -1,3 +1,7 @@
++// FIXME this is evil
++#define protected public
++#include <wx/propgrid/propgridpagestate.h>
++#undef protected
+ #include "myxh_propgrid.h"
+ #include <wx/datetime.h>
+ #include <wx/log.h>

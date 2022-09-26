@@ -1,14 +1,13 @@
-diff -urN codelite-orig/CMakeLists.txt codelite-patched/CMakeLists.txt
---- codelite-orig/CMakeLists.txt	2014-02-14 16:08:02.371570174 +1100
-+++ codelite-patched/CMakeLists.txt	2014-02-14 18:31:35.085719522 +1100
-@@ -105,7 +105,9 @@
+diff -up codelite-16.0.0/CMakeLists.txt.2~ codelite-16.0.0/CMakeLists.txt
+--- codelite-16.0.0/CMakeLists.txt.2~	2022-09-26 02:05:03.818213874 +0200
++++ codelite-16.0.0/CMakeLists.txt	2022-09-26 02:14:00.983829469 +0200
+@@ -164,7 +164,9 @@ endif (UNIX OR MINGW)
  ## Override defaults with user input
  ########################################
  
--set( CL_INSTALL_LIBDIR "lib" )
 +if ( NOT CL_INSTALL_LIBDIR )
-+  set( CL_INSTALL_LIBDIR "lib" )
-+endif()
- if ( PREFIX )
-   set ( CL_PREFIX ${PREFIX} )
- else()
+ set( CL_INSTALL_LIBDIR "lib" )
++endif ()
+ 
+ if ( NOT CL_PREFIX )
+     # If the caller hasn't set his own destination, install to a multi-arch lib dir if applicable

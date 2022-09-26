@@ -1,13 +1,11 @@
-diff -ur codelite-5.1.vanilla/Runtime/codelite.desktop.template codelite-5.1/Runtime/codelite.desktop.template
---- codelite-5.1.vanilla/Runtime/codelite.desktop.template	2013-03-20 21:32:00.000000000 +0100
-+++ codelite-5.1/Runtime/codelite.desktop.template	2013-04-13 16:22:03.310720481 +0200
-@@ -1,6 +1,8 @@
+diff -up codelite-16.0.0/Runtime/codelite.desktop.1~ codelite-16.0.0/Runtime/codelite.desktop
+--- codelite-16.0.0/Runtime/codelite.desktop.1~	2022-09-26 01:57:09.483545322 +0200
++++ codelite-16.0.0/Runtime/codelite.desktop	2022-09-26 02:02:36.812536870 +0200
+@@ -1,5 +1,7 @@
  [Desktop Entry]
- Encoding=UTF-8
--Name=codelite
-+Name=CodeLite
-+Comment=Оpen-source, cross platform IDE for the C/C++ programming languages
+ Name=CodeLite
++Comment=IDE for the C/C++ programming languages
 +Comment[ru]=Свободная, кроссплатформенная среда разработки программного обеспечения для языков С/С++ с открытым исходным кодом
  Exec=codelite %f
- Icon=%%PREFIX%%/share/codelite/images/cubes.png
+ Icon=codelite
  Terminal=false
