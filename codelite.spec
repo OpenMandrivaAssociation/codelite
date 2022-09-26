@@ -15,10 +15,8 @@ Patch2:		codelite-5.4-libdir.patch
 BuildRequires:	cmake ninja
 BuildRequires:	wxgtku3.2-devel
 BuildRequires:	pkgconfig(freetype2)
-#BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(libssh)
-#BuildRequires:	pkgconfig(pangoxft)
-#Requires:	wxgtk3.2
+BuildRequires:	pkgconfig(sqlite3)
 Requires:	xterm
 
 %description
